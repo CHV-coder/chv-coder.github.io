@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <title>Grist Invoice</title>
 
-    <!-- A template for showing an invoice in a Custom Widget in Grist. -->
-    <!-- Uses Vue.js, moment, and the Grist Plugin API -->
+    <!-- Шаблон для отображения счета-фактуры в пользовательском виджете в Grist. -->
+    <!-- Использует Vue.js, moment и API плагина Grist -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="https://docs.getgrist.com/grist-plugin-api.js"></script>
@@ -19,16 +19,16 @@
     <div id="app">
       <div class="status" v-if="status">
         <template v-if="status === 'waiting'">
-          <p>Waiting for data...</p>
+          <p>Ожидание получения данных...</p>
           <ul>
-            <li v-bind:class="[tableConnected ? 'done' : '']">I need <b>read table</b> access.</li>
-            <li v-bind:class="[haveRows ? 'done' : '']">I need at least one row of data.</li>
-            <li v-bind:class="[rowConnected ? 'done' : '']">I need <b>Select By</b> set.</li>
+            <li v-bind:class="[tableConnected ? 'done' : '']">Необходимо дать разрешение на прочтения таблицы</li>
+            <li v-bind:class="[haveRows ? 'done' : '']">Необходимо дать разрешение на прочтения строки.</li>
+            <li v-bind:class="[rowConnected ? 'done' : '']">Необходимо<b>Выбрать</b> строку.</li>
           </ul>
-          <p>Examples:</p>
+          <p>Примеры:</p>
           <ul>
-            <li><a class="button" href="index.html?demo=1">A filled out invoice</a></li>
-            <li><a class="button" href="index.html?labels=1">A labelled invoice</a></li>
+            <li><a class="button" href="index.html?demo=1">Счет-фактура с выбором строки</a></li>
+            <li><a class="button" href="index.html?labels=1">Счет-фактура с выбором строки и метками</a></li>
           </ul>
         </template>
         <template v-else>
@@ -39,9 +39,9 @@
         <div class="top">
           <div class="block">
             <div class="header">
-              <div class="meta title">Invoice</div>
+              <div class="meta title">Отчет</div>
             </div>
-            <div class="info"><span class="meta">Invoice Number</span> #{{ invoice.Number }}</div>
+            <div class="info"><span class="meta">Номер отчета</span> #{{ invoice.Number }}</div>
             <div class="info" v-if="invoice.Issued"><div class="meta date-tag">Issued</div> {{ invoice.Issued | asDate }}</div>
             <div class="info" v-if="invoice.Due"><div class="meta date-tag">Due</div> {{ invoice.Due | asDate }}</div>
           </div>
@@ -78,7 +78,7 @@
         </div>
         
         <div class="client" v-for="business in (invoice.Client ? [invoice.Client] : [])">
-          <div class="title">Client</div>
+          <div class="title">Организация</div>
           <div class="details">
             <template v-if="typeof(business) === 'string'">
               <div class="newlined">{{ business }}</div>
@@ -102,8 +102,8 @@
         <table class="items">
           <template v-if="!Array.isArray(invoice.Items)">
             <tr>
-              <th>Description</th>
-              <th class="money">Total</th>
+              <th>Назначение</th>
+              <th class="money">Баланс</th>
             </tr>
             <tr>
               <td>{{ invoice.Items }}</td>
@@ -112,10 +112,10 @@
           </template>
           <template v-else>
             <tr>
-              <th>Description</th>
-              <th class="money">Unit Price</th>
-              <th class="number">Quantity</th>
-              <th class="money">Total</th>
+              <th>Назначение</th>
+              <th class="money">Приход</th>
+              <th class="number">Расход</th>
+              <th class="money">Баланс</th>
             </tr>
             <tr v-for="item in invoice.Items">
               <td>{{ item.Description }}</td>
@@ -128,19 +128,19 @@
 
         <div class="summary">
           <div class="part">
-            <div class="title">Subtotal</div>
+            <div class="title">Предитог</div>
             <div class="details">{{ invoice.Subtotal | currency }}</div>
           </div>
           <div class="part">
-            <div class="title">Deduction</div>
+            <div class="title">Вычет</div>
             <div class="details">{{ invoice.Deduction | currency }}</div>
           </div>
           <div class="part">
-            <div class="title">Taxes</div>
+            <div class="title">Налог</div>
             <div class="details">{{ invoice.Taxes | currency }}</div>
           </div>
           <div class="total">
-            <div class="title">Total</div>
+            <div class="title">Баланс</div>
             <div class="details">{{ invoice.Total | currency }}</div>
           </div>
         </div>
@@ -154,7 +154,7 @@
             <div class="help-close">
               Add <span class="column-name">Due</span> or <span class="column-name">Issued</span> date to hide this help.
             </div>
-            <div class="title">Column information</div>
+            <div class="title">Информация по столбцам</div>
             <div class="details">
               <table>
                 <tr v-for="group in ['recognized', 'expected', 'ignored']">
@@ -170,7 +170,7 @@
                 </tr>
               </table>
               <template v-if="invoice.SuggestReferencesColumn">
-                <div>For structured address and item information, add a <span class="column-name">References</span> column with this formula:</div>
+                <div>Для получения структурированной информации об адресе и товаре добавьте <span class="column-name">Ссылку</span> к столбцу с этой формулой:</div>
                 <div>
                   <pre>RECORD(rec, expand_refs=1)</pre>
                 </div>
@@ -181,7 +181,7 @@
 
         <div class="footer">
           <div class="thanks">
-            Thank you!
+            Спасибо!
           </div>
         </div>
 
