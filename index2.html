@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <script src="https://docs.getgrist.com/grist-plugin-api.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отчет о движении денежных средств</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Кнопка "Печать" -->
+        <button id="printButton" class="print-button">🖨️ Печать</button>
+
+        <h1>Отчет о движении денежных средств</h1>
+        <p id="period"></p>
+        <p id="organization"></p>
+
+        <h2>Остатки и движение средств</h2>
+        <table id="balanceTable">
+            <thead>
+                <tr>
+                    <th>Остаток на начало периода</th>
+                    <th>Приход</th>
+                    <th>Расход</th>
+                    <th>Остаток на конец периода</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Данные будут вставлены сюда -->
+            </tbody>
+        </table>
+
+        <h2>Движение денежных средств</h2>
+        <table id="ddsTable">
+            <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Контрагент</th>
+                    <th>Описание</th>
+                    <th>Продукт</th>
+                    <th>Город</th>
+                    <th>Цена</th>
+                    <th>Количество</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Данные будут вставлены сюда -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
