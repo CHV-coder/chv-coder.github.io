@@ -97,6 +97,14 @@ ready(function () {
     }
   });
 
+  // Добавляем обработчик для кнопки "Печать"
+  const printButton = document.getElementById("printButton");
+  if (printButton) {
+    printButton.addEventListener("click", function () {
+      window.print();
+    });
+  }
+
   // Обработка ошибок Vue (если используется)
   if (typeof Vue !== 'undefined') {
     Vue.config.errorHandler = function (err, vm, info) {
