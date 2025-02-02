@@ -1,53 +1,106 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Данные из Table4 (Период и Название организации)
-    const table4Data = [
-        { startPeriod: "2023-01-01", endPeriod: "2023-12-31", organization: "ООО Ромашка" }
-    ];
+// Функция для проверки готовности документа
+function ready(fn) {
+  if (document.readyState !== 'loading') {
+    fn();
+  } else {
+    document.addEventListener('DOMContentLoaded', fn);
+  }
+}
 
-    // Данные из Table15 (Остатки и движение средств)
-    const table15Data = [
-        { startBalance: 100000, income: 50000, expense: 30000, endBalance: 120000 }
-    ];
+// Основная функция для обновления данных на странице
+function updateData(row) {
+  try {
+    // Проверяем, есть ли данные в строке
+    if (row === null) {
+      throw new Error("Нет данных для отображения. Пожалуйста, выберите строку.");
+    }
 
-    // Данные из DDS (Движение денежных средств)
-    const ddsData = [
-        { date: "2023-01-15", counterparty: "ИП Иванов", description: "Поставка товара", product: "Товар А", city: "Москва", price: 1000, quantity: 10 },
-        { date: "2023-02-20", counterparty: "ООО Лето", description: "Услуги", product: "Услуга Б", city: "Санкт-Петербург", price: 500, quantity: 5 }
-    ];
+    console.log("Получены данные:", JSON.stringify(row));
 
-    // Заполнение периода и названия организации
+    // Обновляем период и название организации
     const periodElement = document.getElementById("period");
-    periodElement.textContent = `За период: ${table4Data[0].startPeriod} - ${table4Data[0].endPeriod}`;
-
     const organizationElement = document.getElementById("organization");
-    organizationElement.textContent = `Название организации: ${table4Data[0].organization}`;
 
-    // Заполнение таблицы остатков и движения средств
+    if (row.startPeriod && row.endPeriod) {
+      periodElement.textContent = `За период: ${row.startPeriod} - ${row.endPeriod}`;
+    } else {
+      periodElement.textContent = "Период не указан";
+    }
+
+    if (row.organization) {
+      organizationElement.textContent = `Название организации: ${row.organization}`;
+    } else {
+      organizationElement.textContent = "Название организации не указано";
+    }
+
+    // Обновляем таблицу остатков и движения средств
     const balanceTableBody = document.querySelector("#balanceTable tbody");
-    table15Data.forEach(item => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${item.startBalance}</td>
-            <td>${item.income}</td>
-            <td>${item.expense}</td>
-            <td>${item.endBalance}</td>
-        `;
-        balanceTableBody.appendChild(row);
-    });
+    balanceTableBody.innerHTML = ""; // Очищаем таблицу перед обновлением
 
-    // Заполнение таблицы движения денежных средств
+    if (row.startBalance && row.income && row.expense && row.endBalance) {
+      const balanceRow = document.createElement("tr");
+      balanceRow.innerHTML = `
+        <td>${row.startBalance}</td>
+        <td>${row.income}</td>
+        <td>${row.expense}</td>
+        <td>${row.endBalance}</td>
+      `;
+      balanceTableBody.appendChild(balanceRow);
+    } else {
+      balanceTableBody.innerHTML = `<tr><td colspan="4">Данные по остаткам отсутствуют</td></tr>`;
+    }
+
+    // Обновляем таблицу движения денежных средств
     const ddsTableBody = document.querySelector("#ddsTable tbody");
-    ddsData.forEach(item => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${item.date}</td>
-            <td>${item.counterparty}</td>
-            <td>${item.description}</td>
-            <td>${item.product}</td>
-            <td>${item.city}</td>
-            <td>${item.price}</td>
-            <td>${item.quantity}</td>
+    ddsTableBody.innerHTML = ""; // Очищаем таблицу перед обновлением
+
+    if (row.ddsData && Array.isArray(row.ddsData)) {
+      row.ddsData.forEach(item => {
+        const ddsRow = document.createElement("tr");
+        ddsRow.innerHTML = `
+          <td>${item.date || ""}</td>
+          <td>${item.counterparty || ""}</td>
+          <td>${item.description || ""}</td>
+          <td>${item.product || ""}</td>
+          <td>${item.city || ""}</td>
+          <td>${item.price || ""}</td>
+          <td>${item.quantity || ""}</td>
         `;
-        ddsTableBody.appendChild(row);
-    });
+        ddsTableBody.appendChild(ddsRow);
+      });
+    } else {
+      ddsTableBody.innerHTML = `<tr><td colspan="7">Данные по движению денежных средств отсутствуют</td></tr>`;
+    }
+  } catch (err) {
+    console.error("Ошибка при обновлении данных:", err);
+    const errorElement = document.createElement("div");
+    errorElement.textContent = `Ошибка: ${err.message}`;
+    errorElement.style.color = "red";
+    document.body.appendChild(errorElement);
+  }
+}
+
+// Инициализация приложения
+ready(function () {
+  // Подключаемся к Grist
+  grist.ready();
+
+  // Обрабатываем данные при изменении строки
+  grist.onRecord(function (record) {
+    updateData(record);
+  });
+
+  // Обрабатываем ошибки
+  grist.on('message', function (msg) {
+    if (msg.tableId && !msg.dataChange) {
+      console.log("Таблица подключена, но данные не изменились.");
+    }
+  });
+
+  // Обработка ошибок Vue (если используется)
+  if (typeof Vue !== 'undefined') {
+    Vue.config.errorHandler = function (err, vm, info) {
+      console.error("Ошибка Vue:", err);
+    };
+  }
 });
