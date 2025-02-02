@@ -7,57 +7,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Отчет о движении денежных средств</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Отчет о движении денежных средств</h1>
-    <p id="period"></p>
-    <p id="organization"></p>
+    <div class="container">
+        <h1>Отчет о движении денежных средств</h1>
+        <p id="period"></p>
+        <p id="organization"></p>
 
-    <h2>Остатки и движение средств</h2>
-    <table id="balanceTable">
-        <thead>
-            <tr>
-                <th>Остаток на начало периода</th>
-                <th>Приход</th>
-                <th>Расход</th>
-                <th>Остаток на конец периода</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Данные будут вставлены сюда -->
-        </tbody>
-    </table>
+        <h2>Остатки и движение средств</h2>
+        <table id="balanceTable">
+            <thead>
+                <tr>
+                    <th>Остаток на начало периода</th>
+                    <th>Приход</th>
+                    <th>Расход</th>
+                    <th>Остаток на конец периода</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Данные будут вставлены сюда -->
+            </tbody>
+        </table>
 
-    <h2>Движение денежных средств</h2>
-    <table id="ddsTable">
-        <thead>
-            <tr>
-                <th>Дата</th>
-                <th>Контрагент</th>
-                <th>Описание</th>
-                <th>Продукт</th>
-                <th>Город</th>
-                <th>Цена</th>
-                <th>Количество</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Данные будут вставлены сюда -->
-        </tbody>
-    </table>
+        <h2>Движение денежных средств</h2>
+        <table id="ddsTable">
+            <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Контрагент</th>
+                    <th>Описание</th>
+                    <th>Продукт</th>
+                    <th>Город</th>
+                    <th>Цена</th>
+                    <th>Количество</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Данные будут вставлены сюда -->
+            </tbody>
+        </table>
+    </div>
 
     <script src="script.js"></script>
 </body>
