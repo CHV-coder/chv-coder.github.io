@@ -143,9 +143,9 @@ function updateInvoice(row) {
   try {
     data.status = '';
     if (row === null) {
-      throw new Error("(Нет данных - не в строке - пожалуйста, добавьте или выберите строку)");
+      throw new Error("(Нет данных - нет строки - пожалуйста, добавьте или выберите строку)");
     }
-    console.log("GOT...", JSON.stringify(row));
+    console.log("ПОЛУЧИЛ...", JSON.stringify(row));
     if (row.References) {
       try {
         Object.assign(row, row.References);
@@ -154,7 +154,7 @@ function updateInvoice(row) {
       }
     }
 
-    // Add some guidance about columns.
+    // Добавьте несколько указаний по поводу столбцов.
     const want = new Set(Object.keys(addDemo({})));
     const accepted = new Set(['References']);
     const importance = ['Number', 'Client', 'Items', 'Total', 'Invoicer', 'Due', 'Issued', 'Subtotal', 'Deduction', 'Taxes', 'Note'];
