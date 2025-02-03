@@ -68,17 +68,20 @@ const data = {
 };
 let app = undefined;
 
-Vue.filter('currency', formatNumberAsUSD)
-function formatNumberAsUSD(value) {
-  if (typeof value !== "number") {
-    return value || '—';      // falsy value would be shown as a dash.
-  }
-  value = Math.round(value * 100) / 100;    // Round to nearest cent.
-  value = (value === -0 ? 0 : value);       // Avoid negative zero.
+Vue.filter('currency', formatNumberAsRUB);
 
-  const result = value.toLocaleString('en', {
-    style: 'currency', currency: 'USD'
-  })
+function formatNumberAsRUB(value) {
+  if (typeof value !== "number") {
+    return value || '—'; // falsy value would be shown as a dash.
+  }
+  value = Math.round(value * 100) / 100; // Round to nearest cent.
+  value = (value === -0 ? 0 : value); // Avoid negative zero.
+
+  const result = value.toLocaleString('ru-RU', {
+    style: 'currency',
+    currency: 'RUB'
+  });
+
   if (result.includes('NaN')) {
     return value;
   }
