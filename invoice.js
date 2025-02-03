@@ -87,7 +87,7 @@ function formatNumberAsUSD(value) {
 
 Vue.filter('fallback', function(value, str) {
   if (!value) {
-    throw new Error("Please provide column " + str);
+    throw new Error("Пожалуйста, предоставьте колонку " + str);
   }
   return value;
 });
