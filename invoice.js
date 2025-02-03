@@ -72,10 +72,10 @@ Vue.filter('currency', formatNumberAsRUB);
 
 function formatNumberAsRUB(value) {
   if (typeof value !== "number") {
-    return value || '—'; // falsy value would be shown as a dash.
+    return value || '—'; // ложное значение будет отображено в виде прочерка.
   }
-  value = Math.round(value * 100) / 100; // Round to nearest cent.
-  value = (value === -0 ? 0 : value); // Avoid negative zero.
+  value = Math.round(value * 100) / 100; // Округлить до ближайшего цента.
+  value = (value === -0 ? 0 : value); // Избегайте отрицательного нуля.
 
   const result = value.toLocaleString('ru-RU', {
     style: 'currency',
@@ -140,14 +140,14 @@ function updateInvoice(row) {
   try {
     data.status = '';
     if (row === null) {
-      throw new Error("(No data - not on row - please add or select a row)");
+      throw new Error("(Нет данных - не в строке - пожалуйста, добавьте или выберите строку)");
     }
     console.log("GOT...", JSON.stringify(row));
     if (row.References) {
       try {
         Object.assign(row, row.References);
       } catch (err) {
-        throw new Error('Could not understand References column. ' + err);
+        throw new Error('Не удалось понять столбец ссылок. ' + err);
       }
     }
 
@@ -188,7 +188,7 @@ function updateInvoice(row) {
       row.Invoicer.Url = tweakUrl(row.Invoicer.Website);
     }
 
-    // Fiddle around with updating Vue (I'm not an expert).
+    // Повозиться с обновлением Vue (я не эксперт).
     for (const key of want) {
       Vue.delete(data.invoice, key);
     }
@@ -197,7 +197,7 @@ function updateInvoice(row) {
     }
     data.invoice = Object.assign({}, data.invoice, row);
 
-    // Make invoice information available for debugging.
+    // Сделайте информацию об отчете доступной для отладки.
     window.invoice = row;
   } catch (err) {
     handleError(err);
@@ -205,15 +205,15 @@ function updateInvoice(row) {
 }
 
 ready(function() {
-  // Update the invoice anytime the document data changes.
+  // Обновляйте отчет всякий раз, когда меняются данные документа.
   grist.ready();
   grist.onRecord(updateInvoice);
 
-  // Monitor status so we can give user advice.
+  // Следите за состоянием, чтобы мы могли давать советы пользователям.
   grist.on('message', msg => {
-    // If we are told about a table but not which row to access, check the
-    // number of rows.  Currently if the table is empty, and "select by" is
-    // not set, onRecord() will never be called.
+    // Если нам сообщают о таблице, но не указывают, к какой строке следует обращаться, проверьте
+    // количество строк.  В данный момент, если таблица пуста, а "выбрать по" - это
+    // не установлено, функция on Record() никогда не будет вызвана.
     if (msg.tableId && !app.rowConnected) {
       grist.docApi.fetchSelectedTable().then(table => {
         if (table.id && table.id.length >= 1) {
