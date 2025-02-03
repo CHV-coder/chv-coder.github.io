@@ -103,7 +103,7 @@ Vue.filter('asDate', function(value) {
     value = new Date(value * 1000);
   }
   const date = moment.utc(value);
-  return date.isValid() ? date.format('DD MMMM, YYYY') : value;
+  return date.isValid() ? date.format('DD-MMM-YYYY') : value;
 });
 
 function tweakUrl(url) {
