@@ -95,12 +95,15 @@ Vue.filter('fallback', function(value, str) {
   return value;
 });
 
+// Устанавливаем русскую локаль для moment.js
+moment.locale('ru');
+
 Vue.filter('asDate', function(value) {
   if (typeof(value) === 'number') {
     value = new Date(value * 1000);
   }
-  const date = moment.utc(value)
-  return date.isValid() ? date.format('MMMM DD, YYYY') : value;
+  const date = moment.utc(value);
+  return date.isValid() ? date.format('DD MMMM, YYYY') : value;
 });
 
 function tweakUrl(url) {
