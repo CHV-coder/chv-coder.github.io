@@ -68,17 +68,22 @@ const data = {
 };
 let app = undefined;
 
-Vue.filter('currency', formatNumberAsUSD)
-function formatNumberAsUSD(value) {
+Vue.filter('currency', formatNumberAsRUB);
+
+function formatNumberAsRUB(value) {
   if (typeof value !== "number") {
-    return value || '—';      // falsy value would be shown as a dash.
+    return value || '—'; // falsy value would be shown as a dash.
   }
-  value = Math.round(value * 100) / 100;    // Round to nearest cent.
-  value = (value === -0 ? 0 : value);       // Avoid negative zero.
+  value = Math.round(value * 100) / 100; // Round to nearest cent.
+  value = (value === -0 ? 0 : value); // Avoid negative zero.
 
   const result = value.toLocaleString('ru-RU', {
-    style: 'currency', currency: 'РУБ'
-  })
+    style: 'currency',
+    currency: 'RUB', // Указываем код валюты для российского рубля
+    minimumFractionDigits: 2, // Убедимся, что всегда отображаются две цифры после запятой
+    maximumFractionDigits: 2
+  });
+
   if (result.includes('NaN')) {
     return value;
   }
