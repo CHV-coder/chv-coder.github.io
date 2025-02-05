@@ -63,7 +63,7 @@ table.items {
   font-size: 12px; /* Уменьшаем шрифт для всей таблицы */
 }
 
-table.items th {
+table.items th {  
   text-align: left;
   color: white;
   text-transform: uppercase;
