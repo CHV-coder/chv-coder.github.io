@@ -63,7 +63,10 @@ table.items {
   font-size: 12px; /* Уменьшаем шрифт для всей таблицы */
 }
 
-table.items th,
+table.items th {
+  border-right: 1px solid #ff8000; /* Линия между строками */
+}
+
 table.items td {
   border-right: 1px solid #ff8000; /* Линия между столбцами */
 }
