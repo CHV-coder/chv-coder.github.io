@@ -106,9 +106,6 @@ Vue.filter('asDate', function(value) {
 });
 
 Vue.filter('asDate2', function(value) {
-  if (typeof(value) === 'number') {
-    value = new Date(value * 1000);
-  }
   const date = moment.utc(value);
   return date.isValid() ? date.format('DD-MM') : value;
 });
