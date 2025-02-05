@@ -69,7 +69,7 @@ table.items th {
   text-transform: uppercase;
   font-weight: normal;
   padding: 4px;
-  font-size: 12px; /* Уменьшаем шрифт для заголовков */
+  font-size: 14px; /* Уменьшаем шрифт для заголовков */
 }
 
 table.items td {
