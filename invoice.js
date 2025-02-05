@@ -156,7 +156,7 @@ function updateInvoice(row) {
     // Add some guidance about columns.
     const want = new Set(Object.keys(addDemo({})));
     const accepted = new Set(['References']);
-    const importance = ['Date', 'Number', 'Nubber2', 'Client', 'Items', 'Total', 'Invoicer', 'Due', 'Issued', 'Subtotal', 'Deduction', 'Taxes', 'Note'];
+    const importance = ['Date', 'Counterparty', 'Number', 'Nubber2', 'Client', 'Items', 'Total', 'Invoicer', 'Due', 'Issued', 'Subtotal', 'Deduction', 'Taxes', 'Note'];
     if (!(row.Due || row.Issued)) {
       const seen = new Set(Object.keys(row).filter(k => k !== 'id' && k !== '_error_'));
       const help = row.Help = {};
