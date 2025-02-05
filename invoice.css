@@ -60,6 +60,7 @@ table.items {
   width: 100%;
   border: 1px solid #ff8000;
   border-collapse: collapse;
+  font-size: 12px; /* Уменьшаем шрифт для всей таблицы */
 }
 
 table.items th {
@@ -68,11 +69,13 @@ table.items th {
   text-transform: uppercase;
   font-weight: normal;
   padding: 4px;
+  font-size: 12px; /* Уменьшаем шрифт для заголовков */
 }
 
 table.items td {
   background-color: var(--grist-theme-page-panels-main-panel-bg, white);
   padding: 4px;
+  font-size: 12px; /* Уменьшаем шрифт для ячеек */
 }
 
 .client .title, .summary .title, table.items th, .help .title {
