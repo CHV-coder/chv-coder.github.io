@@ -112,12 +112,14 @@
           </template>
           <template v-else>
             <tr>
+              <th>Дата</th>
               <th>Назначение</th>
               <th class="money">Приход</th>
               <th class="number">Расход</th>
               <th class="money">Баланс</th>
             </tr>
             <tr v-for="item in invoice.Items">
+              <td>{{ item.Date | asDate }}</td>
               <td>{{ item.Description }}</td>
               <td class="money">{{ item.Price | currency }}</td>
               <td class="number">{{ item.Quantity }}</td>
