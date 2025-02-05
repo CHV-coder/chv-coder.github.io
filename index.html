@@ -112,13 +112,13 @@
           </template>
           <template v-else>
             <tr>
-              <th style="border: 1px solid #ff8000; white-space: nowrap">Дата</th>
-              <th style="border: 1px solid #ff8000;">Контрагент</th>
-              <th style="border: 1px solid #ff8000;">Назначение</th>
-              <th style="border: 1px solid #ff8000;">Продукция</th>
-              <th style="border: 1px solid #ff8000;">Город</th>
-              <th style="border: 1px solid #ff8000;" class="money">Приход</th>
-              <th style="border: 1px solid #ff8000;" class="money">Расход</th>
+              <th>Дата</th>
+              <th>Контрагент</th>
+              <th>Назначение</th>
+              <th>Продукция</th>
+              <th>Город</th>
+              <th class="money">Приход</th>
+              <th class="money">Расход</th>
             </tr>
             <tr v-for="item in invoice.Items">
               <td>{{ item.Date | asDate }}</td>
