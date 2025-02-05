@@ -63,10 +63,7 @@ table.items {
   font-size: 12px; /* Уменьшаем шрифт для всей таблицы */
 }
 
-table.items th {
-  border-right: 1px solid #ff8000; /* Линия между строками */
-}
-
+table.items th,
 table.items td {
   border-right: 1px solid #ff8000; /* Линия между столбцами */
 }
@@ -95,6 +92,16 @@ table.items td {
 table.items td:first-child {
   white-space: nowrap; /* Запрещаем перенос текста */
   min-width: 120px; /* Минимальная ширина столбца (можно настроить под ваши данные) */
+}
+
+/* Добавляем горизонтальные линии между строками */
+table.items tr {
+  border-bottom: 1px solid #ff8000; /* Линия между строками */
+}
+
+/* Убираем нижнюю границу у последней строки */
+table.items tr:last-child {
+  border-bottom: none; /* Убираем линию у последней строки */
 }
 
 .client .title, .summary .title, table.items th, .help .title {
