@@ -77,7 +77,7 @@
           </div>
         </div>
         
-        <div class="client" v-for="business in (invoice.Client ? [invoice.Client] : [])">
+        <!-- <div class="client" v-for="business in (invoice.Client ? [invoice.Client] : [])">
           <div class="title">Организация</div>
           <div class="details">
             <template v-if="typeof(business) === 'string'">
@@ -97,7 +97,7 @@
               </template>
             </template>
           </div>
-        </div>
+        </div> -->
 
         <table class="items">
           <template v-if="!Array.isArray(invoice.Items)">
