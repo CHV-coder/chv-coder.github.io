@@ -63,13 +63,23 @@ table.items {
   font-size: 12px; /* Уменьшаем шрифт для всей таблицы */
 }
 
-table.items th {  
+table.items th,
+table.items td {
+  border-right: 1px solid #ff8000; /* Линия между столбцами */
+}
+
+table.items th:last-child,
+table.items td:last-child {
+  border-right: none; /* Убираем линию у последнего столбца */
+}
+
+table.items th {
   text-align: left;
   color: white;
   text-transform: uppercase;
   font-weight: normal;
   padding: 4px;
-  font-size: 14px; /* Уменьшаем шрифт для заголовков */
+  font-size: 12px; /* Уменьшаем шрифт для заголовков */
 }
 
 table.items td {
