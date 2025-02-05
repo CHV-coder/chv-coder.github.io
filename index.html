@@ -27,8 +27,8 @@
           </ul>
           <p>Примеры:</p>
           <ul>
-            <li><a class="button" href="index.html?demo=1">Счет-фактура с выбором строки</a></li>
-            <li><a class="button" href="index.html?labels=1">Счет-фактура с выбором строки и метками</a></li>
+            <li><a class="button" href="index.html?demo=1">Отчет с заполненными демо данными</a></li>
+            <li><a class="button" href="index.html?labels=1">Отчет с выбором таблицы и строки</a></li>
           </ul>
         </template>
         <template v-else>
@@ -38,7 +38,7 @@
       <template v-if="invoice">
         <div class="top">
           <div class="block">
-            <div class="header">
+            <!-- <div class="header"> -->
               <div class="meta title">Отчет ДДС</div>
             </div>
             <div class="info"><span class="meta">Дней в отчете</span> #{{ invoice.Number }}</div>
