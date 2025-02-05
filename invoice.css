@@ -88,6 +88,12 @@ table.items td {
   font-size: 12px; /* Уменьшаем шрифт для ячеек */
 }
 
+/* Расширяем первый столбец и запрещаем перенос текста */
+table.items td:first-child {
+  white-space: nowrap; /* Запрещаем перенос текста */
+  min-width: 120px; /* Минимальная ширина столбца (можно настроить под ваши данные) */
+}
+
 .client .title, .summary .title, table.items th, .help .title {
   padding-top: 10px;
   padding-bottom: 10px;
