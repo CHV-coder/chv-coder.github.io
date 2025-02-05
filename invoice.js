@@ -76,8 +76,8 @@ function formatNumberAsUSD(value) {
   value = Math.round(value * 100) / 100;    // Round to nearest cent.
   value = (value === -0 ? 0 : value);       // Avoid negative zero.
 
-  const result = value.toLocaleString('en', {
-    style: 'currency', currency: 'USD'
+  const result = value.toLocaleString('ru-RU', {
+    style: 'currency', currency: 'РУБ'
   })
   if (result.includes('NaN')) {
     return value;
