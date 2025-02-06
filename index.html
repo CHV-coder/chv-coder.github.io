@@ -9,6 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="https://docs.getgrist.com/grist-plugin-api.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <script src="invoice.js?ver=11"></script>
     <script src="exampleData.js"></script>
@@ -16,6 +17,25 @@
     <link rel="stylesheet" href="invoice.css?ver=17">
   </head>
   <body>
+    <!-- начало функции создания пдф -->
+    <button onclick="generatePDF()">Создать PDF</button>
+      <script>
+        function generatePDF() {
+          // Инициализация jsPDF
+          const { jsPDF } = window.jspdf;
+          const doc = new jsPDF();
+
+          // Получаем текст из HTML
+          const content = document.querySelector("body").innerText;
+
+          // Добавляем текст в PDF
+          doc.text(content, 10, 10);
+
+          // Сохраняем PDF
+          doc.save("document.pdf");
+        }
+      </script>
+      <!-- Конец функции создания пдф -->
     <div id="app">
       <div class="status" v-if="status">
         <template v-if="status === 'waiting'">
