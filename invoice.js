@@ -183,7 +183,7 @@ function updateInvoice(row) {
         // row.Subtotal = row.Items.reduce((a, b) => a + b.Price * b.Quantity, 0);
         row.Subtotal = row.Items.Subtotal;
         // row.Total = row.Subtotal - ((row.Deduction || 0) + (row.Taxes || 0));
-        row.Total = (row.Taxes || 0);
+        row.Total = row.Items.Subtotal;
       } catch (e) {
         console.error(e);
       }
