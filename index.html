@@ -45,6 +45,15 @@
             <div class="info" v-if="invoice.Issued"><div class="meta date-tag">Начальная дата</div> {{ invoice.Issued | asDate }}</div>
             <div class="info" v-if="invoice.Due"><div class="meta date-tag">Конечная дата</div> {{ invoice.Due | asDate }}</div>
           </div>
+
+
+                <button onclick="printPage()" class="no-print">Сохранить в PDF</button>
+                
+                <script>
+                  function printPage() {
+                    window.print(); // Открывает диалог печати
+                  }
+                </script>
           
           <!-- <div class="supplier">
             <div v-for="business in (invoice.Invoicer ? [invoice.Invoicer] : [])">
@@ -195,12 +204,5 @@
         </div>
       </template>
     </div>
-      <button onclick="printPage()" class="no-print">Сохранить в PDF</button>
-      
-      <script>
-        function printPage() {
-          window.print(); // Открывает диалог печати
-        }
-      </script>
   </body>
 </html>
