@@ -10,6 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="https://docs.getgrist.com/grist-plugin-api.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <script src="invoice.js?ver=11"></script>
     <script src="exampleData.js"></script>
@@ -19,22 +20,23 @@
   <body>
     <!-- начало функции создания пдф -->
     <button onclick="generatePDF()">Создать PDF</button>
-      <script>
-        function generatePDF() {
-          // Инициализация jsPDF
-          const { jsPDF } = window.jspdf;
-          const doc = new jsPDF();
+  <script>
+    function generatePDF() {
+      const { jsPDF } = window.jspdf;
 
-          // Получаем текст из HTML
-          const content = document.querySelector("body").innerText;
+      // Создаем скриншот страницы с помощью html2canvas
+      html2canvas(document.body).then((canvas) => {
+        const imgData = canvas.toDataURL("image/png"); // Конвертируем в изображение
+        const doc = new jsPDF();
 
-          // Добавляем текст в PDF
-          doc.text(content, 10, 10);
+        // Добавляем изображение в PDF
+        doc.addImage(imgData, "PNG", 10, 10, 180, 0); // Параметры: изображение, формат, координаты, размеры
 
-          // Сохраняем PDF
-          doc.save("document.pdf");
-        }
-      </script>
+        // Сохраняем PDF
+        doc.save("document.pdf");
+      });
+    }
+  </script>
       <!-- Конец функции создания пдф -->
     <div id="app">
       <div class="status" v-if="status">
