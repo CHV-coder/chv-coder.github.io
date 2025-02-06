@@ -134,19 +134,19 @@
 
         <div class="summary">
           <div class="part">
-            <div class="title">Пред. итог</div>
+            <div class="title">Остаток на начало периода</div>
             <div class="details">{{ invoice.Subtotal | currency }}</div>
           </div>
           <div class="part">
-            <div class="title">Вычет</div>
+            <div class="title">Приход</div>
             <div class="details">{{ invoice.Deduction | currency }}</div>
           </div>
           <div class="part">
-            <div class="title">Налог</div>
+            <div class="title">Расход</div>
             <div class="details">{{ invoice.Taxes | currency }}</div>
           </div>
           <div class="total">
-            <div class="title">Баланс</div>
+            <div class="title">Остаток на конец периода</div>
             <div class="details">{{ invoice.Total | currency }}</div>
           </div>
         </div>
