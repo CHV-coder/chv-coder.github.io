@@ -74,7 +74,7 @@ table.items td:last-child {
 }
 
 table.items th {
-  text-align: left;
+  text-align: center; /*поменял с left на центр */
   color: white;
   text-transform: uppercase;
   font-weight: normal;
