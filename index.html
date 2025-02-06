@@ -195,5 +195,12 @@
         </div>
       </template>
     </div>
+      <button onclick="printPage()" class="no-print">Сохранить в PDF</button>
+      
+      <script>
+        function printPage() {
+          window.print(); // Открывает диалог печати
+        }
+      </script>
   </body>
 </html>
