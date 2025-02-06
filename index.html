@@ -19,26 +19,6 @@
     <link rel="stylesheet" href="invoice.css?ver=17">
   </head>
   <body>
-    <!-- начало функции создания пдф -->
-    <button onclick="generatePDF()">Создать PDF</button>
-  <script>
-    function generatePDF() {
-      const { jsPDF } = window.jspdf;
-
-      // Создаем скриншот страницы с помощью html2canvas
-      html2canvas(document.body).then((canvas) => {
-        const imgData = canvas.toDataURL("image/png"); // Конвертируем в изображение
-        const doc = new jsPDF();
-
-        // Добавляем изображение в PDF
-        doc.addImage(imgData, "PNG", 10, 10, 180, 0); // Параметры: изображение, формат, координаты, размеры
-
-        // Сохраняем PDF
-        doc.save("document.pdf");
-      });
-    }
-  </script>
-      <!-- Конец функции создания пдф -->
     <div id="app">
       <div class="status" v-if="status">
         <template v-if="status === 'waiting'">
@@ -218,5 +198,27 @@
         </div>
       </template>
     </div>
+
+        <!-- начало функции создания пдф -->
+        <button onclick="generatePDF()">Создать PDF</button>
+        <script>
+          function generatePDF() {
+            const { jsPDF } = window.jspdf;
+
+            // Создаем скриншот страницы с помощью html2canvas
+            html2canvas(document.body).then((canvas) => {
+              const imgData = canvas.toDataURL("image/png"); // Конвертируем в изображение
+              const doc = new jsPDF();
+
+              // Добавляем изображение в PDF
+              doc.addImage(imgData, "PNG", 10, 10, 180, 0); // Параметры: изображение, формат, координаты, размеры
+
+              // Сохраняем PDF
+              doc.save("document.pdf");
+            });
+          }
+        </script>
+        <!-- Конец функции создания пдф -->
+         
   </body>
 </html>
