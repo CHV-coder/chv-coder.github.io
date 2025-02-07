@@ -110,7 +110,7 @@ function tweakUrl(url) {
   if (url.toLowerCase().startsWith('http')) {
     return url;
   }
-  return 'https://' + url;
+  return 'https://t-ugor.ru'; //пока убрал + url и подставил t-ugor (return 'https://' + url;), чтобы отображалась только главная страница t-ugor
 };
 
 function handleError(err) {
